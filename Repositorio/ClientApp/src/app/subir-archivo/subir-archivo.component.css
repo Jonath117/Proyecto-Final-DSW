@@ -1,0 +1,23 @@
+@import '../home/home.component.css';
+
+.footer-content {
+    background-color: #FFD700;
+    padding: 1rem;
+    /*color: #004080;font-size: 30px;
+    border-top: 2px solid #004080;*/
+    
+}
+
+.botones-Sub
+{
+  margin-block-start: 10px;
+    width: 100%;
+    background-color: #ffc107;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  
+}

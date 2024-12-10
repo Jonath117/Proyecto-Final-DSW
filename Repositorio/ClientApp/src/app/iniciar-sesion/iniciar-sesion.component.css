@@ -1,0 +1,74 @@
+/* IniciarSesion.css */
+@import '../home/home.component.css';
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container h1,
+.login-container h2 {
+    margin-bottom: 20px;
+}
+
+.login-container input {
+    margin-bottom: 15px;
+    height: 45px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #ffc107;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-login:hover {
+    background-color: #e0a800;
+}
+
+.forgot-password {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/*
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    margin-top: 50px;
+}
+    */
+    .footer-content {
+        background-color: #FFD700;
+        padding: 1rem;
+        /*color: #004080;font-size: 30px;
+        border-top: 2px solid #004080;*/
+        margin-top: 300px;
+        
+    }

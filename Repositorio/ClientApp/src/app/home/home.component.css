@@ -1,0 +1,161 @@
+
+body {
+    font-family: Arial, sans-serif;
+}
+header {
+    font-size: auto;
+    background-color: #FFD700;
+    padding: 1rem 0; 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0,5); /* Sombra suave */
+}
+
+/*del color gris*/
+.header2 {
+    font-size: 10px;
+    background-color: #E0E0E0;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0,5); /* Sombra suave */
+    
+}
+/*boton de navegacion*/
+.nav2 button {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    color: inherit; /* Hereda el color del texto */
+    padding: 0; /* Sin padding */
+    font-size: 1rem; /* Tamaño de la fuente */
+    cursor: pointer; /* Cambia el cursor a un puntero */
+}
+
+.nav2 button:hover {
+    text-decoration: underline; /* Opcional: subraya al pasar el ratón */
+}
+
+
+
+/*color donde dice Repositorio UCB*/
+.navbar-brand {
+    font-size: 30px;
+    font-weight: bold;
+    color: #004080;
+    
+}
+
+.user-actions .btn {
+    margin-left: 0.5rem;
+}
+
+aside {
+    background-color: #E0E0E0;
+    padding: 1rem;
+}
+
+.content {
+    max-width: 1200px;
+    padding: 1rem;
+}
+
+.welcome {
+    margin-bottom: 2rem;
+}
+
+.footer-content {
+    background-color: #FFD700;
+    padding: 1rem;
+    /*color: #004080;font-size: 30px;
+    border-top: 2px solid #004080;*/
+    margin-top: 30px;
+    
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    display: inline;
+    margin-right: 1rem;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    margin-right: 0.5rem;
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    
+}
+
+article {
+    background-color: #F9F9F9;
+    border: 1px solid #DADADA;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.411);
+}
+
+article img {
+    max-width: 100%;
+    height: auto;
+}
+
+.articulo-all
+{
+    background-color: #E0E0E0;
+    padding: 30px;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.411);
+}
+
+/* Clase genérica para botones */
+.btn {
+    
+    border-radius: 5px;
+    padding: 0.5rem 1rem; /* Asegura un relleno uniforme */
+    font-size: 1rem;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ 
+}
+
+/* Estilos específicos */
+.btn-subirAr {
+    background-color: #ffc107; /* Color de fondo */
+    color: white; /* Texto en blanco */
+
+}
+
+.btn-login {
+    background-color: #ffc107;
+    color: white;
+
+}
+
+.btn-sigin {
+    background-color: #ffc107;
+    color: white;
+}
+
+/* Estilo adicional para acciones */
+.container2 {
+    display: flex;
+    justify-content: space-around; /* Espacio uniforme alrededor de los botones */
+    align-items: center; /* Centra verticalmente si hay otros elementos */
+    gap: 15px; /* Espacio entre los botones */
+}
+
+.input-text-3
+{
+    text-align: left;
+    padding: 0 20px;
+}

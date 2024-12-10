@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repositorio UCB</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="home.component.css">   
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            
+            <div class="container">
+                <a class="navbar-brand">Repositorio UCB</a>
+                <div class="container2">
+                  <!-- Opción visible solo para Docentes -->
+                  <a *ngIf="rol === 'Docente'" routerLink="/subir-archivo" class="btn btn-subirAr">Subir Archivo</a>
+                  
+                  <!-- Opción visible solo para Examinadores -->
+                  <a *ngIf="rol === 'Examinador'" routerLink="/ver-archivos" class="btn btn-sigin">Ver Pendientes</a>
+                  
+                  <!-- Botón de inicio de sesión visible si no hay un rol -->
+                  <div class="nav2" *ngIf="!rol">
+                    <a routerLink="/iniciar-sesion" class="btn btn-login">Iniciar Sesión</a>
+                  </div>
+              
+                  <!-- Botón de cerrar sesión -->
+                  <button *ngIf="rol" class="btn btn-login" (click)="cerrarSesion()">Cerrar Sesión</button>
+                </div>
+              </div>
+              
+              
+              
+        </nav>
+    </header>
+
+    <div class="header2">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <div class="nav2">
+                    <button class="btn-outline-dark custom-btn">Repositorio principal</button>
+                </div>
+            </div>
+        </nav>
+    </div>
+    
+
+    <main class="container d-flex flex-column flex-lg-row mt-4">
+        <aside class="col-lg-3">
+            <nav>
+                <div class="search-bar">
+                    <input type="text" class="form-control" placeholder="Buscar...">
+                    <button class="btn btn-primary">🔍</button>
+                </div>
+
+                <div class="BusquedaAvanzadaLink">
+                    <div class="container">
+                      <div class="nav2">
+                        <a routerLink="/busqueda-avanzada">Búsqueda Avanzada</a>
+                      </div>
+                    </div>
+                  </div>                  
+
+
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="#">Agregados Recientemente</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Materias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Comunidades</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <section class="content col-lg-9">
+            <div class="welcome">
+                <h2>Bienvenido</h2>
+                <p>
+                    ¡Bienvenido a la página de Repositorios de la Universidad Católica Boliviana! Esta plataforma está diseñada para facilitar la difusión del conocimiento, promoviendo la investigación, el aprendizaje y el desarrollo profesional.
+                </p>
+            </div>
+
+            <div class="communities mb-4">
+                <h3>Comunidades</h3>
+                <ul>
+                    <li>Facultad de Ingeniería</li>
+                    <li>Facultad de Ciencias Sociales</li>
+                    <li>Facultad de Medicina</li>
+                    <li>Facultad de Odontología</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    
+                </ul>
+            </div>
+
+            <div class="featured">
+                <h3 class="input-text-3">Artículos destacados</h3>
+                
+                <div class="articulo-all">
+
+                    <div class="articles-grid">
+                        <article>
+                            <a routerLink="/ver-documento">
+                                <img src="https://image-cdn.essentiallysports.com/wp-content/uploads/FedcwptXwAIG-gS.jpeg?width=900" alt="Artículo">
+                                <h4>El Maxsucho</h4>
+                                <p>Breve descripción del artículo.</p>
+                            </a>
+                        </article>
+                        <article>
+                            <img src="https://via.placeholder.com/150" alt="Artículo">
+                            <h4>Título del Artículo</h4>
+                            <p>Breve descripción del artículo.</p>
+                        </article>
+                        <article>
+                            <img src="https://via.placeholder.com/150" alt="Artículo">
+                            <h4>Título del Artículo</h4>
+                            <p>Breve descripción del artículo.</p>
+                        </article>
+                        <article>
+                            <img src="https://via.placeholder.com/150" alt="Artículo">
+                            <h4>Título del Artículo</h4>
+                            <p>Breve descripción del artículo.</p>
+                        </article>
+                        <article>
+                            <img src="https://via.placeholder.com/150" alt="Artículo">
+                            <h4>Título del Artículo</h4>
+                            <p>Breve descripción del artículo.</p>
+                        </article>
+                        <article>
+                            <img src="https://via.placeholder.com/150" alt="Artículo">
+                            <h4>Título del Artículo</h4>
+                            <p>Breve descripción del artículo.</p>
+                        </article>
+                        <article>
+                            <img src="https://via.placeholder.com/150" alt="Artículo">
+                            <h4>Título del Artículo</h4>
+                            <p>Breve descripción del artículo.</p>
+                        </article>
+                        <article>
+                            <img src="https://via.placeholder.com/150" alt="Artículo">
+                            <h4>Título del Artículo</h4>
+                            <p>Breve descripción del artículo.</p>
+                        </article>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content text-center">
+            <p>&copy; 2024 Universidad Católica Boliviana. Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">Casos de Uso</a></li>
+                    <li><a href="#">Explorar</a></li>
+                    <li><a href="#">Recursos</a></li>
+                    <li><a href="Soporte.html">Soporte</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

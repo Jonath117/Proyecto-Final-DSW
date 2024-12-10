@@ -1,0 +1,29 @@
+@import '../home/home.component.css';
+
+.header4
+{
+    padding: 20px 0;
+}
+
+.boton-subAr
+{
+    margin-block-start: 10px;
+    
+    background-color: #ffc107;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  
+}
+
+.footer-content {
+    background-color: #FFD700;
+    padding: 2rem;
+    /*color: #004080;font-size: 30px;
+    border-top: 2px solid #004080;*/
+    margin-top:290px;
+    
+}

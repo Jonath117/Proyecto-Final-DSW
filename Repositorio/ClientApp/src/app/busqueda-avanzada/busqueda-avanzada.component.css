@@ -1,0 +1,111 @@
+@import '../home/home.component.css';
+
+/* Estructura general 
+.search-section {
+  background-color: #f1d564;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.search-filters, .additional-filters {
+  
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 100px;
+margin-top: 30px;
+margin-block-end: 150px;
+}
+
+.search-filters select,
+.search-filters input,
+.search-filters button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  
+}
+
+.results-section {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 250px;
+}
+
+.results {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+*/
+
+.search-filters {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Añade espacio entre los elementos del filtro */
+  }
+  
+  .search-filters input[type="text"] {
+    flex-grow: 1; /* Expande el input al máximo espacio disponible */
+  }
+  
+  .filter-options {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaciado uniforme entre los filtros y botones */
+  }
+  
+  .filter-options input[type="text"] {
+    margin-right: 10px; /* Espacio extra solo para los filtros */
+  }
+  
+  
+  
+  
+    .result-card {
+      background-color: #fff;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      flex: 1 1 calc(25% - 30px);
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    .texto {
+      margin: auto;
+      margin-top: 30px;
+      text-align: center; /* Centra el texto si lo necesitas */
+    }
+    
+    .pagination-controls {
+      display: flex; /* Asegura que los elementos de la paginación estén en fila */
+      justify-content: center; /* Centra los controles horizontalmente */
+      gap: 5px; /* Espacio entre los botones de paginación */
+      margin: 0 auto; /* Centra el contenedor en la página */
+      margin-top: 40px; /* Espacio superior para separar del texto */
+    }
+    
+  
+    
+    .user-actions .btn {
+      margin-left: 0.5rem;
+  }
+  
+  .botones
+  {
+    margin-block-start: 10px;
+      width: 100%;
+      background-color: #ffc107;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    
+  }
+  
