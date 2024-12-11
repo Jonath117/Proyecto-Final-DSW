@@ -14,23 +14,49 @@ using Notis.Services;
             _documentoService = documentoService;
         }
 
-        [HttpPost]
-        public IActionResult CrearDocumento([FromBody] DocumentoDTO documento)
-        {   Console.WriteLine("Solicitud recibida desde angular");
-            Console.WriteLine($"Documento recibido: {documento.Titulo}, {documento.Autores}");
-            if (documento == null)
-            {
-                return BadRequest("El documento no puede ser nulo.");
-            }
-            // Lógica para guardar el documento
-            return Ok(new { Message = "Documento creado exitosamente." });
+    [HttpPost("subir")]
+    public IActionResult CrearDocumentoConArchivo([FromForm] DocumentoDTO documento, IFormFile archivo)
+    {
+        if (documento == null)
+        {
+            return BadRequest("El documento no puede ser nulo.");
         }
 
-        [HttpGet]
-        public IActionResult ListarDocumentos()
+        if (archivo == null || archivo.Length == 0)
         {
-            var documentos = _documentoService.ListarDocumentos();
-            return Ok(documentos);
+            return BadRequest("El archivo no puede estar vacío.");
         }
+
+        // Guardar el archivo
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+        Directory.CreateDirectory(uploadsFolder);
+
+        var filePath = Path.Combine(uploadsFolder, archivo.FileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            archivo.CopyTo(stream);
+        }
+
+        Console.WriteLine($"Archivo guardado en: {filePath}");
+        Console.WriteLine($"Documento recibido: {documento.Titulo}, {documento.Autores}, {documento.Categoria}, {documento.TipoDocumento}, {documento.PalabrasClave}, {documento.FechaPublicacion}");
+
+        return Ok(new { Message = "Documento y archivo subidos exitosamente." });
+    }
+
+
+
+    [HttpGet("archivos")]
+    public IActionResult ListarArchivos()
+    {
+        var rutaCarpeta = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+        if (!Directory.Exists(rutaCarpeta))
+        {
+            return NotFound("No se encontró la carpeta de archivos.");
+        }
+
+        var archivos = Directory.GetFiles(rutaCarpeta).Select(Path.GetFileName).ToList();
+        return Ok(archivos);
+    }
     }
 

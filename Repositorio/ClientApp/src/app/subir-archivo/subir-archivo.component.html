@@ -69,6 +69,20 @@
                 <label for="fechaPublicacion" class="form-label">Fecha de Publicación</label>
                 <input type="date" [(ngModel)]="fechaPublicacion" id="fechaPublicacion" name="fechaPublicacion" class="form-control" required>
             </div>
+            <!-- Archivo adjunto -->
+            <div class="mb-3">
+                <label for="archivoAdjunto" class="form-label">Archivo adjunto</label>
+                <input
+                    type="file"
+                    class="form-control"
+                    id="archivoAdjunto"
+                    (change)="onFileSelected($event)"
+                    accept=".pdf"
+                />
+                <div class="form-text">
+                    El archivo debe ser nombrado con su apellido. Ej: "moreno.pdf". El archivo debe ser .pdf
+                </div>
+            </div>
             <button type="submit" class="botones-Sub">Subir Documento</button>
         </form>
     </main>

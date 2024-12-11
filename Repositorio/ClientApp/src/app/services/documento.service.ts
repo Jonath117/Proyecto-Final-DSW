@@ -11,8 +11,9 @@ export class DocumentoService {
   constructor(private http: HttpClient) {}
 
   subirDocumento(formData: FormData): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/subir`, formData);
+    return this.http.post<any>('http://localhost:5098/api/documentos/subir', formData);
   }
+  
   
   crearDocumento(documento: any): Observable<any> {
     console.log('Enviando documento:', documento);
