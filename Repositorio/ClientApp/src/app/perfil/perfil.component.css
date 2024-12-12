@@ -1,0 +1,39 @@
+@import '../home/home.component.css';
+
+.doc-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-block: 15px;
+}
+
+.perfil-info
+{
+    margin-block: 40px;
+    width: 300px;
+    
+}
+
+.foto-preview {
+    width: 200px;
+}
+
+.ambos
+{
+    display: flex;
+}
+
+.document-view
+{
+    padding-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-content {
+    background-color: #FFD700;
+    padding: 1rem;
+    /*color: #004080;font-size: 30px;
+    border-top: 2px solid #004080;*/
+    margin-top: 300px;   
+}

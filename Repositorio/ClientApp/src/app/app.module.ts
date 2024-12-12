@@ -18,7 +18,11 @@ import { VerArchivosComponent } from './ver-archivos/ver-archivos.component';
 import { VerDocumentoComponent } from './ver-documento/ver-documento.component';
 import { AuthService } from './services/auth.service';
 
-
+const routes: Routes = [
+  { path: 'subir-archivo', component: SubirArchivoComponent },
+  { path: 'perfil', component: PerfilComponent }, // Nueva ruta
+  { path: '', redirectTo: '/subir-archivo', pathMatch: 'full' },
+];
 
 
 @NgModule({
