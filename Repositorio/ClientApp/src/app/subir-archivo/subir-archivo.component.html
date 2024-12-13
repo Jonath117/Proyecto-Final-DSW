@@ -32,55 +32,83 @@
         </nav>
     </div>
 
-    <main class="container my-4">
-        <h1 class="text-center mb-4">Subir Archivo</h1>
-        <form (submit)="subirArchivo()">
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Título</label>
-                <input type="text" [(ngModel)]="titulo" id="titulo" name="titulo" class="form-control" placeholder="Título del documento" required>
-            </div>
-            <div class="mb-3">
-                <label for="autores" class="form-label">Autores</label>
-                <input type="text" [(ngModel)]="autores" id="autores" name="autores" class="form-control" placeholder="Apellidos, Nombres" required>
-            </div>
-            <div class="mb-3">
-                <label for="categoria" class="form-label">Categoría</label>
-                <input type="text" [(ngModel)]="categoria" id="categoria" name="categoria" class="form-control" placeholder="Ejemplo: Ingeniería" required>
-            </div>
-            <div class="mb-3">
-                <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
-                <select [(ngModel)]="tipoDocumento" id="tipoDocumento" name="tipoDocumento" class="form-select" required>
-                    <option value="" disabled selected>Seleccione un tipo</option>
-                    <option value="Tesis">Tesis</option>
-                    <option value="Artículo">Artículo</option>
-                    <option value="Proyecto">Proyecto</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="palabrasClave" class="form-label">Palabras Clave</label>
-                <input type="text" [(ngModel)]="palabrasClave" id="palabrasClave" name="palabrasClave" class="form-control" placeholder="Palabras clave separadas por coma" required>
-            </div>
-            <div class="mb-3">
-                <label for="fechaPublicacion" class="form-label">Fecha de Publicación</label>
-                <input type="date" [(ngModel)]="fechaPublicacion" id="fechaPublicacion" name="fechaPublicacion" class="form-control" required>
-            </div>
-            <!-- Archivo adjunto -->
-            <div class="mb-3">
-                <label for="archivoAdjunto" class="form-label">Archivo adjunto</label>
-                <input
-                    type="file"
-                    class="form-control"
-                    id="archivoAdjunto"
-                    (change)="onFileSelected($event)"
-                    accept=".pdf"
-                />
-                <div class="form-text">
-                    El archivo debe ser nombrado con su apellido. Ej: "moreno.pdf". El archivo debe ser .pdf
-                </div>
-            </div>
-            <button type="submit" class="botones-Sub">Subir Documento</button>
+    <div class="container mt-4">
+        <h2>Subir Documento</h2>
+        <form>
+          <!-- Título -->
+          <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input
+              type="text"
+              id="titulo"
+              class="form-control"
+              [(ngModel)]="documento.titulo"
+              name="titulo"
+              required
+            />
+          </div>
+      
+          <!-- Resumen -->
+          <div class="mb-3">
+            <label for="resumen" class="form-label">Resumen</label>
+            <textarea
+              id="resumen"
+              class="form-control"
+              [(ngModel)]="documento.resumen"
+              name="resumen"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Link del repo -->
+          <div class="mb-3">
+            <label for="titulo" class="form-label">Link al repositorio</label>
+            <input
+              type="text"
+              id="link"
+              class="form-control"
+              [(ngModel)]="documento.link"
+              name="link"
+              required
+            />
+          </div>
+      
+          <!-- Tipo de Trabajo -->
+        <div class="mb-3">
+            <label for="tipoTrabajo" class="form-label">Tipo de Trabajo</label>
+            <select
+            id="tipoTrabajo"
+            class="form-select text-dark bg-white"
+            [(ngModel)]="documento.idTipoTrabajo"
+            name="idTipoTrabajo"
+            required
+            style="color: #000; background-color: #fff;"
+            >
+            <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.idTipoTrabajo">
+                {{ tipo.nombre }}
+            </option>
+            </select>
+        </div>
+      
+          <!-- Archivo -->
+          <div class="mb-3">
+            <label for="archivo" class="form-label">Seleccionar Archivo</label>
+            <input
+              type="file"
+              id="archivo"
+              class="form-control"
+              (change)="seleccionarArchivo($event)"
+              required
+            />
+          </div>
+      
+          <!-- Botón -->
+          <button type="button" class="btn btn-primary" (click)="subirDocumento()">
+            Subir Documento
+          </button>
         </form>
-    </main>
+      </div>
 
   <footer>
     <div class="footer-content text-center">

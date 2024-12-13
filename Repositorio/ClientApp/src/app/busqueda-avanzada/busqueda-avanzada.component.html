@@ -39,106 +39,73 @@
         </nav>
     </div>
 
-    <main class="container my-4">
-      <!-- Caja de búsqueda principal -->
-      <div class="mb-4">
-          <input type="text" class="form-control form-control-lg" placeholder="Escribe palabras clave...">
-          <button class="botones">Buscar</button>
-      </div>
-
-      <!-- Filtros avanzados -->
-      <div class="card p-4">
+    <div class="container my-4">
+        <!-- Caja de búsqueda principal -->
+        <div class="mb-4">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              placeholder="Busca en los títulos y descripciones..."
+              [(ngModel)]="filtros.palabrasClave"
+            />
+            <button class="botones" (click)="buscarProyectos()">Buscar</button>
+        </div>
+      
+        <!-- Filtros avanzados -->
+        <div class="card p-4">
           <h2 class="h5 mb-3">Filtros avanzados</h2>
           <form>
-              <div class="row">
-                  <!-- Categoría -->
-                  <div class="col-md-6 mb-3">
-                      <label for="categoria" class="form-label">Categoría</label>
-                      <select id="categoria" class="form-select">
-                          <option selected>Seleccione una categoría</option>
-                          <option value="biotecnologia">Biotecnología</option>
-                          <option value="ingenieria">Ingeniería</option>
-                          <option value="humanidades">Humanidades</option>
-                      </select>
-                  </div>
-                  
-                  <!-- Rango de fechas -->
-                  <div class="col-md-6 mb-3">
-                      <label class="form-label">Rango de fechas</label>
-                      <div class="d-flex">
-                          <input type="date" class="form-control me-2" placeholder="Desde">
-                          <input type="date" class="form-control" placeholder="Hasta">
-                      </div>
-                  </div>
-
-                  <!-- Tipo de documento -->
-                  <div class="col-md-6 mb-3">
-                      <label for="tipoDocumento" class="form-label">Tipo de documento</label>
-                      <select id="tipoDocumento" class="form-select">
-                          <option selected>Seleccione un tipo</option>
-                          <option value="tesis">Tesis</option>
-                          <option value="articulo">Artículo</option>
-                          <option value="proyecto">Proyecto</option>
-                      </select>
-                  </div>
-
-                  <!-- Palabras clave -->
-                  <div class="col-md-6 mb-3">
-                      <label for="palabrasClave" class="form-label">Palabras clave</label>
-                      <input type="text" id="palabrasClave" class="form-control" placeholder="Escribe palabras clave">
-                  </div>
-
-                  <!-- Autor -->
-                  <div class="col-md-6 mb-3">
-                      <label for="autor" class="form-label">Autor</label>
-                      <input type="text" id="autor" class="form-control" placeholder="Nombre del autor">
-                  </div>
-
-                  <!-- Ordenamiento -->
-                  <div class="col-md-6 mb-3">
-                      <label for="ordenarPor" class="form-label">Ordenar por</label>
-                      <select id="ordenarPor" class="form-select">
-                          <option value="relevancia">Relevancia</option>
-                          <option value="fecha_reciente">Fecha más reciente</option>
-                          <option value="fecha_antigua">Fecha más antigua</option>
-                          <option value="alfabetico">Título alfabético</option>
-                      </select>
-                  </div>
+            <div class="row">
+              <!-- Estado -->
+              <div class="col-md-6 mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <select
+                  id="estado"
+                  class="form-select"
+                  [(ngModel)]="filtros.estado"
+                  name="estado"
+                >
+                  <option value="Activo">Activo</option>
+                  <option value="Finalizado">Finalizado</option>
+                </select>
               </div>
-              <button type="submit" class="botones">Aplicar filtros</button>
+              
+              <!-- Autor -->
+              <div class="col-md-6 mb-3">
+                <label for="autor" class="form-label">Autor</label>
+                <input
+                  type="text"
+                  id="autor"
+                  class="form-control"
+                  placeholder="Nombre del autor"
+                  [(ngModel)]="filtros.autor"
+                />
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" (click)="buscarProyectosFiltro()">Aplicar filtros</button>
           </form>
-      </div>
-
-      <!-- Resultados -->
-      <div class="mt-5">
+        </div>
+        
+      
+        <!-- Resultados -->
+        <div *ngIf="resultados.length > 0; else noResultados">
+          <!-- Mostrar la lista de resultados -->
           <h2 class="h5 mb-3">Resultados</h2>
           <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action">
-                  <h5 class="mb-1">Título del Documento</h5>
-                  <p class="mb-1">Autor: John Doe | Fecha: 2024-01-15 | Categoría: Biotecnología</p>
-                  <small>Ver más detalles</small>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">
-                  <h5 class="mb-1">Otro Documento</h5>
-                  <p class="mb-1">Autor: Jane Doe | Fecha: 2023-12-10 | Categoría: Ingeniería</p>
-                  <small>Ver más detalles</small>
-              </a>
+            <a
+              *ngFor="let resultado of resultados"
+              href="#"
+              class="list-group-item list-group-item-action"
+            >
+              <h5 class="mb-1">{{ resultado.titulo }}</h5>
+              <p class="mb-1">{{ resultado.resumen }}</p>
+              <small>Autor: {{ resultado.autor }} | Fecha: {{ resultado.fechaSubida }}</small>
+            </a>
           </div>
-      </div>
-  </main>
-
-  <footer>
-    <div class="footer-content text-center">
-        <p>&copy; 2024 Universidad Católica Boliviana. Todos los derechos reservados.</p>
-        <div class="footer-links">
-            <ul>
-                <li><a href="#">Casos de Uso</a></li>
-                <li><a href="#">Explorar</a></li>
-                <li><a href="#">Recursos</a></li>
-                <li><a href="Soporte.html">Soporte</a></li>
-            </ul>
         </div>
-    </div>
-</footer>
-</body>
-</html>
+      </div>
+
+      <ng-template #noResultados>
+        <p>No hay resultados para la búsqueda.</p>
+      </ng-template>
+      

@@ -18,7 +18,7 @@
                   <a *ngIf="rol === 'Docente'" routerLink="/subir-archivo" class="btn btn-subirAr">Subir Archivo</a>
                   
                   <!-- Opción visible solo para Examinadores -->
-                  <a *ngIf="rol === 'Examinador'" routerLink="/ver-archivos" class="btn btn-sigin">Ver Pendientes</a>
+                  <a *ngIf="rol === 'Revisor'" routerLink="/ver-archivos" class="btn btn-sigin">Ver Pendientes</a>
                   
                   <!-- Botón de inicio de sesión visible si no hay un rol -->
                   <div class="nav2" *ngIf="!rol">
@@ -50,9 +50,15 @@
         <aside class="col-lg-3">
             <nav>
                 <div class="search-bar">
-                    <input type="text" class="form-control" placeholder="Buscar...">
-                    <button class="btn btn-primary">🔍</button>
-                </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Buscar..."
+                      [(ngModel)]="terminoBusqueda"/> <!-- Vincula el término de búsqueda -->
+                    
+                    <button class="btn btn-primary" (click)="redirigirABusqueda()">🔍</button>
+                  </div>
+                  
 
                 <div class="BusquedaAvanzadaLink">
                     <div class="container">
@@ -80,22 +86,11 @@
             </div>
 
             <div class="communities mb-4">
-                <h3>Comunidades</h3>
+                <h3>Areas de conocimiento</h3>
                 <ul>
-                    <li>Facultad de Ingeniería</li>
-                    <li>Facultad de Ciencias Sociales</li>
-                    <li>Facultad de Medicina</li>
-                    <li>Facultad de Odontología</li>
-                    <li>Mecatrónica</li>
-                    <li>Ingeniería en software</li>
-                    <li>Administracion de empresas</li>
-                    <li>Ingeniería comercial</li>
-                    <li>Agronegocios</li>
-                    <li>Psicología</li>
-                    <li>Arquitectura</li>
-                    <li>Fonoaudiología</li>
-                    <li>Fisioterapia</li>
-                    
+                    <li *ngFor="let area of areas">
+                        {{ area.nombreArea }}
+                      </li>
                 </ul>
             </div>
 
@@ -105,48 +100,13 @@
                 <div class="articulo-all">
 
                     <div class="articles-grid">
-                        <article>
-                            <a routerLink="/ver-documento">
-                                <img src="https://image-cdn.essentiallysports.com/wp-content/uploads/FedcwptXwAIG-gS.jpeg?width=900" alt="Artículo">
-                                <h4>El Maxsucho</h4>
-                                <p>Breve descripción del artículo.</p>
-                            </a>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
+                        <ul>
+                            <li *ngFor="let proyecto of proyectos | slice:0:10">
+                              <h3>{{ proyecto.titulo }}</h3>
+                              <p>{{ proyecto.resumen }}</p>
+                              <!--<button (click)="eliminarProyecto(proyecto.idproyecto)">Eliminar</button> -->
+                            </li>
+                          </ul>
                         
                     </div>
                 </div>

@@ -16,12 +16,14 @@ import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { SubirArchivoComponent } from './subir-archivo/subir-archivo.component';
 import { VerArchivosComponent } from './ver-archivos/ver-archivos.component';
 import { VerDocumentoComponent } from './ver-documento/ver-documento.component';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../services/auth.service';
+import { AreasConocimientoService } from '../services/areas-conocimiento.service';
 
 const routes: Routes = [
   { path: 'subir-archivo', component: SubirArchivoComponent },
   { path: 'perfil', component: PerfilComponent }, // Nueva ruta
   { path: '', redirectTo: '/subir-archivo', pathMatch: 'full' },
+  { path: 'ver-documento/:id', component: VerDocumentoComponent },
 ];
 
 
@@ -55,10 +57,10 @@ const routes: Routes = [
       { path: 'registrarse', component: RegistrarseComponent},
       { path: 'subir-archivo', component: SubirArchivoComponent},
       { path: 'ver-archivos', component: VerArchivosComponent},
-      { path: 'ver-documento', component: VerDocumentoComponent}
+      { path: 'ver-documento/:id', component: VerDocumentoComponent}
     ])
   ],
-  providers: [AuthService],
+  providers: [AuthService, AreasConocimientoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

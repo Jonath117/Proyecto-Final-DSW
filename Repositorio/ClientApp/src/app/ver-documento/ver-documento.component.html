@@ -41,29 +41,31 @@
     </div>
 
         <main class="container document-view">
-            <h1 class="doc-title">El Maxsucho</h1>
-            <h2 class="doc-author">Nombre del autor y universidad</h2>
-            <hr>
-            <div class="doc-details">
-                <p><strong>URL:</strong> <span>http://link-al-documento</span></p>
-                <p><strong>Fecha de publicación:</strong> <span>DD/MM/AAAA</span></p>
-            </div>
-            <div class="doc-preview">
-                <img src="https://image-cdn.essentiallysports.com/wp-content/uploads/FedcwptXwAIG-gS.jpeg?width=900" alt="Vista previa del documento" class="doc-image">
-                <div class="doc-info">
-                    <p><strong>Nombre:</strong> Neurona gigante de retina de Ballena</p>
-                    <p><strong>Tamaño:</strong> 5Mb</p>
-                    <p><strong>Formato:</strong> PDF</p>
-                    <a href="#" class="btn-primary">Visualizar Documento</a>
+            <div *ngIf="proyecto; else noProyecto">
+                <h1 class="doc-title">{{ proyecto.titulo }}</h1>
+                <h2 class="doc-author">Autor: {{ proyecto.autor || 'Desconocido' }}</h2>
+                <hr />
+                <div class="doc-details">
+                  <p><strong>Fecha de publicación:</strong> {{ proyecto.fechaSubida | date }}</p>
+                  <p><strong>Resumen:</strong> {{ proyecto.resumen }}</p>
+                  <p><strong>Enlace del repositorio:</strong> 
+                    <a [href]="proyecto.enlaceRepositorio" target="_blank">{{ proyecto.enlaceRepositorio || 'No disponible' }}</a>
+                  </p>
                 </div>
-            </div>
-            <hr>
-            <div class="doc-collection">
+                <div class="doc-actions mt-4">
+                  <button class="btn btn-primary" (click)="descargarDocumento()">Descargar PDF</button>
+                </div>
+              </div>
+              
+              <ng-template #noProyecto>
+                <p>No se encontró información para el proyecto solicitado.</p>
+              </ng-template>              
+            <!--<div class="doc-collection">
                 <p><strong>Colección a la que pertenece:</strong></p>
                 <ul>
                     <li>Biotecnología</li>
                 </ul>
-            </div>
+            </div> -->
         </main>
 
         <footer>
