@@ -40,32 +40,50 @@
         </nav>
     </div>
 
-        <main class="container document-view">
-            <div *ngIf="proyecto; else noProyecto">
-                <h1 class="doc-title">{{ proyecto.titulo }}</h1>
-                <h2 class="doc-author">Autor: {{ proyecto.autor || 'Desconocido' }}</h2>
-                <hr />
-                <div class="doc-details">
-                  <p><strong>Fecha de publicación:</strong> {{ proyecto.fechaSubida | date }}</p>
-                  <p><strong>Resumen:</strong> {{ proyecto.resumen }}</p>
-                  <p><strong>Enlace del repositorio:</strong> 
-                    <a [href]="proyecto.enlaceRepositorio" target="_blank">{{ proyecto.enlaceRepositorio || 'No disponible' }}</a>
-                  </p>
-                </div>
-                <div class="doc-actions mt-4">
-                  <button class="btn btn-primary" (click)="descargarDocumento()">Descargar PDF</button>
-                </div>
-              </div>
-              
-              <ng-template #noProyecto>
-                <p>No se encontró información para el proyecto solicitado.</p>
-              </ng-template>              
-            <!--<div class="doc-collection">
-                <p><strong>Colección a la que pertenece:</strong></p>
-                <ul>
-                    <li>Biotecnología</li>
-                </ul>
-            </div> -->
-        </main>
+    <div *ngIf="proyecto; else noProyecto">
+        <h1 class="doc-title">{{ proyecto.titulo }}</h1>
+        <h2 class="doc-author">Autor: {{ proyecto.autor || 'Desconocido' }}</h2>
+        <hr />
+        <div class="doc-details">
+          <p><strong>Fecha de publicación:</strong> {{ proyecto.fechaSubida | date }}</p>
+          <p><strong>Resumen:</strong> {{ proyecto.resumen }}</p>
+          <p><strong>Enlace del repositorio:</strong> 
+            <a [href]="proyecto.enlaceRepositorio" target="_blank">{{ proyecto.enlaceRepositorio || 'No disponible' }}</a>
+          </p>
+          <div class="doc-actions mt-4">
+            <button class="btn btn-primary" (click)="descargarDocumento()">Descargar PDF</button>
+          </div>
+        </div>
+      
+        <!-- Acciones del revisor -->
+        <div *ngIf="rolUsuario === 'Revisor' && proyecto.estatusAprobacion === 'Pendiente'" class="mt-4">
+          <textarea
+            [(ngModel)]="comentarios"
+            class="form-control mb-3"
+            rows="4"
+            placeholder="Escribe tus comentarios aquí..."
+          ></textarea>
+          <button class="btn btn-success me-2" (click)="aprobar()">Aprobar</button>
+          <button class="btn btn-danger" (click)="rechazar()">Rechazar</button>
+        </div>
+      
+        <!-- Estado del proyecto -->
+        <div class="mt-4">
+          <p *ngIf="proyecto.estatusAprobacion === 'Aprobado'" class="text-success">
+            Este proyecto ha sido aprobado.
+          </p>
+          <p *ngIf="proyecto.estatusAprobacion === 'Rechazado'" class="text-danger">
+            Este proyecto ha sido rechazado.
+          </p>
+        </div>
+      
+        <div class="doc-actions mt-4">
+          <button *ngIf="proyecto.estatusAprobacion === 'Aprobado'" class="btn btn-primary" (click)="descargarDocumento()">Descargar PDF</button>
+        </div>
+      </div>
+      
+      <ng-template #noProyecto>
+        <p>No se encontró información para el proyecto solicitado.</p>
+      </ng-template>      
     </body>
 </html>

@@ -31,10 +31,17 @@ export class HomeComponent implements OnInit {
   obtenerAreas(): void {
     this.areasService.obtenerTodas().subscribe({
       next: (data) => {
-        console.log('Áreas recibidas:', data);
-        this.areas = data;
+        if (Array.isArray(data)) {
+          this.areas = data;
+        } else {
+          console.error('Los datos no son un array:', data);
+          this.areas = [];
+        }
       },
-      error: (err) => console.error('Error al obtener áreas:', err),
+      error: (err) => {
+        console.error('Error al obtener áreas:', err);
+        this.areas = [];
+      },
     });
   }
 

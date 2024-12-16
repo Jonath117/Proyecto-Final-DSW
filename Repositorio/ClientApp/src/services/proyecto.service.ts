@@ -20,17 +20,15 @@ export class ProyectoService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  // Crear un nuevo proyecto
-  crearProyectoConArchivo(proyecto: any, archivo: File): Observable<any> {
+  subirArchivo(archivo: File): Observable<{ ruta: string }> {
     const formData = new FormData();
-    
-    // Asegúrate de que 'proyectoDTO' coincida con el parámetro del backend
-    formData.append('proyectoDTO', JSON.stringify(proyecto));
-    formData.append('archivo', archivo); // 'archivo' debe coincidir exactamente con el nombre del parámetro en el backend
-    
-    return this.http.post(`${this.apiUrl}/subir`, formData);
+    formData.append('file', archivo);
+    return this.http.post<{ ruta: string }>(`${this.apiUrl}/subir-archivo`, formData);
   }
-  
+
+  crearProyecto(proyecto: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/crear-proyecto`, proyecto);
+  }
 
   // Actualizar un proyecto existente
   actualizarProyecto(id: number, proyecto: any): Observable<void> {

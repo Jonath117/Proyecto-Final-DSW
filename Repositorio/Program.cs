@@ -46,11 +46,11 @@ app.MapFallbackToFile("index.html");
 
 app.Run();
 
-builder.Services.AddControllers()
+/*builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNameCaseInsensitive = true; // Ignorar mayúsculas/minúsculas
-    });
+    });*/
 
 app.UseRouting();
 app.UseEndpoints(endpoints =>

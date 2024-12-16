@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ProyectoService } from '../../services/proyecto.service';
-import { TiposTrabajoService } from 'src/services/tipos-trabajo.service';
 
-interface Participante
-{
-  nombreCompleto: string,
-  carrera: string
+interface Participante {
+  nombreCompleto: string;
+  carrera: string;
 }
 
 @Component({
   selector: 'app-subir-archivo',
   templateUrl: './subir-archivo.component.html',
-  styleUrls: ['./subir-archivo.component.css']
+  styleUrls: ['./subir-archivo.component.css'],
 })
-
 export class CrearProyectoComponent implements OnInit {
-  // Define el objeto del proyecto con el tipo correcto para `participantes`
   proyecto: {
     titulo: string;
     resumen: string;
@@ -23,7 +19,8 @@ export class CrearProyectoComponent implements OnInit {
     idTipoTrabajo: number | null;
     estado: string;
     idUsuario: number | null;
-    participantes: Participante[]; // Cambia a un arreglo del tipo `Participante`
+    participantes: Participante[];
+    documentoPdf: string;
   } = {
     titulo: '',
     resumen: '',
@@ -31,7 +28,8 @@ export class CrearProyectoComponent implements OnInit {
     idTipoTrabajo: null,
     estado: 'Activo',
     idUsuario: null,
-    participantes: [], // Inicializa como un arreglo vacío
+    participantes: [],
+    documentoPdf: '',
   };
 
   archivo!: File;
@@ -54,8 +52,15 @@ export class CrearProyectoComponent implements OnInit {
   }
 
   agregarParticipante(nombre: string, carrera: string): void {
-    // Agrega un participante con el tipo correcto
     this.proyecto.participantes.push({ nombreCompleto: nombre, carrera: carrera });
+  }
+
+  eliminarUltimoParticipante(): void {
+    if (this.proyecto.participantes.length === 0) {
+      alert('No hay participantes para eliminar.');
+      return;
+    }
+    this.proyecto.participantes.pop();
   }
 
   crearProyecto(): void {
@@ -64,33 +69,28 @@ export class CrearProyectoComponent implements OnInit {
       return;
     }
 
-    this.proyectoService.crearProyectoConArchivo(this.proyecto, this.archivo).subscribe({
+    // Primero subimos el archivo
+    this.proyectoService.subirArchivo(this.archivo).subscribe({
       next: (response) => {
-        console.log('Proyecto creado exitosamente:', response);
-        alert('Proyecto creado exitosamente.');
-        this.resetFormulario();
+        this.proyecto.documentoPdf = response.ruta; // Guardamos la ruta del archivo
+        this.proyectoService.crearProyecto(this.proyecto).subscribe({
+          next: () => {
+            console.log('Proyecto creado exitosamente');
+            alert('Proyecto creado exitosamente.');
+            this.resetFormulario();
+          },
+          error: (err) => {
+            console.error('Error al crear proyecto:', err);
+            alert('Ocurrió un error al crear el proyecto.');
+          },
+        });
       },
       error: (err) => {
-        console.error('Error al crear proyecto:', err);
-        alert('Ocurrió un error al crear el proyecto.');
+        console.error('Error al subir el archivo:', err);
+        alert('Ocurrió un error al subir el archivo.');
       },
     });
   }
-  
-  eliminarUltimoParticipante(): void {
-    if (this.proyecto.participantes.length === 0) {
-      alert('No hay participantes para eliminar.');
-      return;
-    }
-  
-    if (this.proyecto.participantes.length === 1) {
-      alert('Debe haber al menos un participante.');
-      return;
-    }
-  
-    this.proyecto.participantes.pop();
-  }
-  
 
   resetFormulario(): void {
     this.proyecto = {
@@ -101,6 +101,7 @@ export class CrearProyectoComponent implements OnInit {
       estado: 'Activo',
       idUsuario: this.proyecto.idUsuario,
       participantes: [],
+      documentoPdf: '',
     };
     this.archivo = null!;
   }

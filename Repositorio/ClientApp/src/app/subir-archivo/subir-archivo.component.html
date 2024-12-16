@@ -109,12 +109,30 @@
             <p>{{ i + 1 }}. {{ participante.nombreCompleto }} - {{ participante.carrera }}</p>
           </div>
           <div class="mt-2">
-            <input type="text" #nombre placeholder="Nombre Completo" class="form-control mb-2" />
-            <input type="text" #carrera placeholder="Carrera" class="form-control mb-2" />
-            <button type="button" class="btn btn-primary" (click)="agregarParticipante(nombre.value, carrera.value)">
+            <input
+              type="text"
+              #nombre
+              placeholder="Nombre Completo"
+              class="form-control mb-2"
+            />
+            <input
+              type="text"
+              #carrera
+              placeholder="Carrera"
+              class="form-control mb-2"
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="agregarParticipante(nombre.value, carrera.value)"
+            >
               Agregar Participante
             </button>
-            <button type="button" class="btn btn-danger" (click)="eliminarUltimoParticipante()">
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="eliminarUltimoParticipante()"
+            >
               Quitar Último Participante
             </button>
           </div>
@@ -125,6 +143,6 @@
           Crear Proyecto
         </button>
       </form>
-    </div>
+    </div>    
 </body>
 </html>

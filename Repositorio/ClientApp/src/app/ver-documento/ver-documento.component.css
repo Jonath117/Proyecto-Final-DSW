@@ -10,3 +10,94 @@ border: 1px solid #007bff;
 background-color: #0056b3;
 border-color: #0056b3;
 }
+.container {
+max-width: 800px;
+margin: auto;
+}
+
+.card {
+border-radius: 10px;
+overflow: hidden;
+}
+
+.card-header {
+padding: 1rem;
+background: linear-gradient(to right, #4caf50, #81c784);
+text-align: center;
+}
+
+.doc-title {
+font-size: 1.8rem;
+font-weight: bold;
+margin: 0;
+}
+
+.doc-author {
+font-size: 1.2rem;
+color: #555;
+}
+
+.doc-details p {
+margin-bottom: 0.8rem;
+font-size: 1rem;
+}
+
+textarea {
+width: 100%;
+resize: none;
+border: 1px solid #ddd;
+border-radius: 5px;
+padding: 0.5rem;
+}
+
+textarea:focus {
+border-color: #007bff;
+outline: none;
+box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+button {
+padding: 0.5rem 1.5rem;
+border-radius: 5px;
+font-size: 1rem;
+font-weight: bold;
+}
+
+button:focus {
+outline: none;
+box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.btn-success {
+background-color: #4caf50;
+border-color: #4caf50;
+}
+
+.btn-success:hover {
+background-color: #45a049;
+}
+
+.btn-danger {
+background-color: #f44336;
+border-color: #f44336;
+}
+
+.btn-danger:hover {
+background-color: #d32f2f;
+}
+
+.btn-primary {
+background-color: #007bff;
+border-color: #007bff;
+}
+
+.btn-primary:hover {
+background-color: #0056b3;
+}
+
+.alert {
+margin-top: 2rem;
+text-align: center;
+font-size: 1.2rem;
+}
+  
