@@ -1,65 +1,103 @@
 @import '../home/home.component.css';
 
-/* VerDocumento.css */
-
-
-
-.breadcrumb-bar {
-    background-color: #e9ecef;
-    padding: 10px;
-    font-size: 14px;
+.btn-primary {
+background-color: #007bff; /* Azul */
+color: #fff;
+border: 1px solid #007bff;
 }
 
-.breadcrumb-link {
-    text-decoration: none;
-    color: #000;
+.btn-primary:hover {
+background-color: #0056b3;
+border-color: #0056b3;
+}
+.container {
+max-width: 800px;
+margin: auto;
 }
 
-.document-view {
+.card {
+border-radius: 10px;
+overflow: hidden;
+}
 
-    padding: 20px 0;
+.card-header {
+padding: 1rem;
+background: linear-gradient(to right, #4caf50, #81c784);
+text-align: center;
 }
 
 .doc-title {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
+font-size: 1.8rem;
+font-weight: bold;
+margin: 0;
 }
 
 .doc-author {
-    text-align: center;
-    font-size: 18px;
-    color: #555;
+font-size: 1.2rem;
+color: #555;
 }
 
-
-
-.doc-preview {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.doc-details p {
+margin-bottom: 0.8rem;
+font-size: 1rem;
 }
 
-.doc-image {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
+textarea {
+width: 100%;
+resize: none;
+border: 1px solid #ddd;
+border-radius: 5px;
+padding: 0.5rem;
 }
 
-.doc-info {
-    flex: 1;
+textarea:focus {
+border-color: #007bff;
+outline: none;
+box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
 }
 
-.doc-info p {
-    margin: 5px 0;
+button {
+padding: 0.5rem 1.5rem;
+border-radius: 5px;
+font-size: 1rem;
+font-weight: bold;
 }
 
-.footer-content {
-    text-align: center;
-    background-color: #FFD700;
-    padding: 1rem;
-    /*color: #004080;font-size: 30px;
-    border-top: 2px solid #004080;*/
-    margin-top:290px;
-    
+button:focus {
+outline: none;
+box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
 }
+
+.btn-success {
+background-color: #4caf50;
+border-color: #4caf50;
+}
+
+.btn-success:hover {
+background-color: #45a049;
+}
+
+.btn-danger {
+background-color: #f44336;
+border-color: #f44336;
+}
+
+.btn-danger:hover {
+background-color: #d32f2f;
+}
+
+.btn-primary {
+background-color: #007bff;
+border-color: #007bff;
+}
+
+.btn-primary:hover {
+background-color: #0056b3;
+}
+
+.alert {
+margin-top: 2rem;
+text-align: center;
+font-size: 1.2rem;
+}
+  

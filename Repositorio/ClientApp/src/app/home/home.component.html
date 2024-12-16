@@ -10,30 +10,27 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg">
-            
-            <div class="container">
-                <a class="navbar-brand">Repositorio UCB</a>
-                <div class="container2">
-                  <!-- Opción visible solo para Docentes -->
-                  <a *ngIf="rol === 'Docente'" routerLink="/subir-archivo" class="btn btn-subirAr">Subir Archivo</a>
-                  
-                  <!-- Opción visible solo para Examinadores -->
-                  <a *ngIf="rol === 'Examinador'" routerLink="/ver-archivos" class="btn btn-sigin">Ver Pendientes</a>
-                  
-                  <!-- Botón de inicio de sesión visible si no hay un rol -->
-                  <div class="nav2" *ngIf="!rol">
-                    <a routerLink="/iniciar-sesion" class="btn btn-login">Iniciar Sesión</a>
-                  </div>
-              
-                  <!-- Botón de cerrar sesión -->
-                  <button *ngIf="rol" class="btn btn-login" (click)="cerrarSesion()">Cerrar Sesión</button>
-                </div>
-              </div>
-              
-              
-              
+          <div class="container-fluid">
+            <a class="navbar-brand">Repositorio UCB</a>
+            <!-- Botones alineados a la derecha -->
+            <div class="user-actions">
+              <!-- CRUD de usuarios (Administrador)-->
+              <a *ngIf="rol === 'Administrador'" routerLink="/admin-usuarios" class="btn btn-subirAr">Gestionar Usuarios</a> 
+              <!-- Subir Archivo (Docente) -->
+              <a *ngIf="rol === 'Docente'" routerLink="/subir-archivo" class="btn btn-subirAr">Subir Archivo</a>
+              <!-- Ver Pendientes (Revisor) -->
+              <a *ngIf="rol === 'Revisor'" routerLink="/ver-archivos-pendientes" class="btn btn-sigin">Ver Pendientes</a>
+              <!-- Mi Perfil -->
+              <a *ngIf="rol" routerLink="/perfil" class="btn btn-perfil">Mi Perfil</a>
+              <!-- Iniciar Sesión -->
+              <a *ngIf="!rol" routerLink="/iniciar-sesion" class="btn btn-login">Iniciar Sesión</a>
+              <!-- Cerrar Sesión -->
+              <button *ngIf="rol" class="btn btn-cerrar" (click)="cerrarSesion()">Cerrar Sesión</button>
+            </div>
+          </div>
         </nav>
-    </header>
+      </header>
+      
 
     <div class="header2">
         <nav class="navbar navbar-expand-lg">
@@ -50,9 +47,15 @@
         <aside class="col-lg-3">
             <nav>
                 <div class="search-bar">
-                    <input type="text" class="form-control" placeholder="Buscar...">
-                    <button class="btn btn-primary">🔍</button>
-                </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Buscar..."
+                      [(ngModel)]="terminoBusqueda"/> <!-- Vincula el término de búsqueda -->
+                    
+                    <button class="btn btn-primary" (click)="redirigirABusqueda()">🔍</button>
+                  </div>
+                  
 
                 <div class="BusquedaAvanzadaLink">
                     <div class="container">
@@ -64,7 +67,7 @@
 
 
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="#">Agregados Recientemente</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/proyectos-recientes">Agregados Recientemente</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Materias</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Comunidades</a></li>
                 </ul>
@@ -80,22 +83,11 @@
             </div>
 
             <div class="communities mb-4">
-                <h3>Comunidades</h3>
+                <h3>Areas de conocimiento</h3>
                 <ul>
-                    <li>Facultad de Ingeniería</li>
-                    <li>Facultad de Ciencias Sociales</li>
-                    <li>Facultad de Medicina</li>
-                    <li>Facultad de Odontología</li>
-                    <li>Mecatrónica</li>
-                    <li>Ingeniería en software</li>
-                    <li>Administracion de empresas</li>
-                    <li>Ingeniería comercial</li>
-                    <li>Agronegocios</li>
-                    <li>Psicología</li>
-                    <li>Arquitectura</li>
-                    <li>Fonoaudiología</li>
-                    <li>Fisioterapia</li>
-                    
+                    <li *ngFor="let area of areas">
+                        {{ area.nombreArea }}
+                      </li>
                 </ul>
             </div>
 
@@ -105,48 +97,15 @@
                 <div class="articulo-all">
 
                     <div class="articles-grid">
-                        <article>
-                            <a routerLink="/ver-documento">
-                                <img src="https://image-cdn.essentiallysports.com/wp-content/uploads/FedcwptXwAIG-gS.jpeg?width=900" alt="Artículo">
-                                <h4>El Maxsucho</h4>
-                                <p>Breve descripción del artículo.</p>
+                        <ul>
+                            <a *ngFor="let proyecto of proyectos | slice:0:10"
+                            [routerLink]="['/ver-documento', proyecto.idproyecto]"
+                            >
+                              <h3>{{ proyecto.titulo }}</h3>
+                              <p>{{ proyecto.resumen }}</p>
+                              <!--<button (click)="eliminarProyecto(proyecto.idproyecto)">Eliminar</button> -->
                             </a>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
-                        <article>
-                            <img src="https://via.placeholder.com/150" alt="Artículo">
-                            <h4>Título del Artículo</h4>
-                            <p>Breve descripción del artículo.</p>
-                        </article>
+                          </ul>
                         
                     </div>
                 </div>
@@ -156,16 +115,16 @@
 
     <footer>
         <div class="footer-content text-center">
-            <p>&copy; 2024 Universidad Católica Boliviana. Todos los derechos reservados.</p>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="#">Casos de Uso</a></li>
-                    <li><a href="#">Explorar</a></li>
-                    <li><a href="#">Recursos</a></li>
-                    <li><a href="Soporte.html">Soporte</a></li>
-                </ul>
-            </div>
+          <p>&copy; 2024 Universidad Católica Boliviana. Todos los derechos reservados.</p>
+          <div class="footer-links">
+            <ul>
+              <li><a href="#">Casos de Uso</a></li>
+              <li><a href="#">Explorar</a></li>
+              <li><a href="#">Recursos</a></li>
+              <li><a href="Soporte.html">Soporte</a></li>
+            </ul>
+          </div>
         </div>
-    </footer>
+      </footer>      
 </body>
 </html>

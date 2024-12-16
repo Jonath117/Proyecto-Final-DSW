@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5098/api/login';
+  private apiUrl = 'http://localhost:5122/Auth';
   private rolSubject: BehaviorSubject<string | null>; // BehaviorSubject para el rol
   public rol$: Observable<string | null>; // Observable que los componentes pueden suscribirse
 
@@ -18,7 +18,8 @@ export class AuthService {
   }
 
   iniciarSesion(correo: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { Correo: correo, Password: password });
+    const payload = { correo, contraseña: password }; // Coincide con el DTO esperado en el backend
+    return this.http.post<any>(`${this.apiUrl}/login`, payload);
   }
 
   guardarRol(rol: string): void {

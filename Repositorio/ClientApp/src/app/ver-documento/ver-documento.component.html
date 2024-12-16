@@ -40,44 +40,50 @@
         </nav>
     </div>
 
-        <main class="container document-view">
-            <h1 class="doc-title">El Maxsucho</h1>
-            <h2 class="doc-author">Nombre del autor y universidad</h2>
-            <hr>
-            <div class="doc-details">
-                <p><strong>URL:</strong> <span>http://link-al-documento</span></p>
-                <p><strong>Fecha de publicación:</strong> <span>DD/MM/AAAA</span></p>
-            </div>
-            <div class="doc-preview">
-                <img src="https://image-cdn.essentiallysports.com/wp-content/uploads/FedcwptXwAIG-gS.jpeg?width=900" alt="Vista previa del documento" class="doc-image">
-                <div class="doc-info">
-                    <p><strong>Nombre:</strong> Neurona gigante de retina de Ballena</p>
-                    <p><strong>Tamaño:</strong> 5Mb</p>
-                    <p><strong>Formato:</strong> PDF</p>
-                    <a href="#" class="btn-primary">Visualizar Documento</a>
-                </div>
-            </div>
-            <hr>
-            <div class="doc-collection">
-                <p><strong>Colección a la que pertenece:</strong></p>
-                <ul>
-                    <li>Biotecnología</li>
-                </ul>
-            </div>
-        </main>
-
-        <footer>
-            <div class="footer-content text-center">
-                <p>&copy; 2024 Universidad Católica Boliviana. Todos los derechos reservados.</p>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="#">Casos de Uso</a></li>
-                        <li><a href="#">Explorar</a></li>
-                        <li><a href="#">Recursos</a></li>
-                        <li><a href="Soporte.html">Soporte</a></li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
+    <div *ngIf="proyecto; else noProyecto">
+        <h1 class="doc-title">{{ proyecto.titulo }}</h1>
+        <h2 class="doc-author">Autor: {{ proyecto.autor || 'Desconocido' }}</h2>
+        <hr />
+        <div class="doc-details">
+          <p><strong>Fecha de publicación:</strong> {{ proyecto.fechaSubida | date }}</p>
+          <p><strong>Resumen:</strong> {{ proyecto.resumen }}</p>
+          <p><strong>Enlace del repositorio:</strong> 
+            <a [href]="proyecto.enlaceRepositorio" target="_blank">{{ proyecto.enlaceRepositorio || 'No disponible' }}</a>
+          </p>
+          <div class="doc-actions mt-4">
+            <button class="btn btn-primary" (click)="descargarDocumento()">Descargar PDF</button>
+          </div>
+        </div>
+      
+        <!-- Acciones del revisor -->
+        <div *ngIf="rolUsuario === 'Revisor' && proyecto.estatusAprobacion === 'Pendiente'" class="mt-4">
+          <textarea
+            [(ngModel)]="comentarios"
+            class="form-control mb-3"
+            rows="4"
+            placeholder="Escribe tus comentarios aquí..."
+          ></textarea>
+          <button class="btn btn-success me-2" (click)="aprobar()">Aprobar</button>
+          <button class="btn btn-danger" (click)="rechazar()">Rechazar</button>
+        </div>
+      
+        <!-- Estado del proyecto -->
+        <div class="mt-4">
+          <p *ngIf="proyecto.estatusAprobacion === 'Aprobado'" class="text-success">
+            Este proyecto ha sido aprobado.
+          </p>
+          <p *ngIf="proyecto.estatusAprobacion === 'Rechazado'" class="text-danger">
+            Este proyecto ha sido rechazado.
+          </p>
+        </div>
+      
+        <div class="doc-actions mt-4">
+          <button *ngIf="proyecto.estatusAprobacion === 'Aprobado'" class="btn btn-primary" (click)="descargarDocumento()">Descargar PDF</button>
+        </div>
+      </div>
+      
+      <ng-template #noProyecto>
+        <p>No se encontró información para el proyecto solicitado.</p>
+      </ng-template>      
     </body>
 </html>
