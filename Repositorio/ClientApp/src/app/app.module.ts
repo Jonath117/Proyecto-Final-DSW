@@ -21,6 +21,7 @@ import { AreasConocimientoService } from '../services/areas-conocimiento.service
 import { ProyectosRecientes } from './proyectos-recientes/proyectos-recientes.component';
 import { CommonModule } from '@angular/common';
 import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.component';
+import { VerArchivosAdminComponent } from './ver-pendientes-admin/ver-pendientes-admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'ver-documento/:id', component: VerDocumentoComponent},
   { path: 'proyectos-recientes', component: ProyectosRecientes},
   { path: 'admin-usuarios', component: AdminUsuariosComponent},
+  { path: 'ver-pendientes-admin', component: VerArchivosAdminComponent }
 ];
 
 
@@ -53,7 +55,8 @@ const routes: Routes = [
     VerArchivosComponent,
     VerDocumentoComponent,
     ProyectosRecientes,
-    AdminUsuariosComponent
+    AdminUsuariosComponent,
+    VerArchivosAdminComponent
   ],
   imports: [
     CommonModule,

@@ -20,6 +20,8 @@
               <a *ngIf="rol === 'Docente'" routerLink="/subir-archivo" class="btn btn-subirAr">Subir Archivo</a>
               <!-- Ver Pendientes (Revisor) -->
               <a *ngIf="rol === 'Revisor'" routerLink="/ver-archivos-pendientes" class="btn btn-sigin">Ver Pendientes</a>
+              <!-- Ver pendientes (administrador)-->
+              <a *ngIf="rol === 'Administrador'" routerLink="/ver-pendientes-admin" class="btn btn-sigin">Ver Pendientes</a>
               <!-- Mi Perfil -->
               <a *ngIf="rol" routerLink="/perfil" class="btn btn-perfil">Mi Perfil</a>
               <!-- Iniciar Sesión -->
@@ -68,8 +70,6 @@
 
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="/proyectos-recientes">Agregados Recientemente</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Materias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Comunidades</a></li>
                 </ul>
             </nav>
         </aside>

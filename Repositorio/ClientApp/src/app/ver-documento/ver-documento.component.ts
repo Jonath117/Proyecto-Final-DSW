@@ -96,7 +96,8 @@ export class VerDocumentoComponent implements OnInit {
       idProyecto: this.proyecto.idproyecto,
       estatusAprobacion: 'Aprobado',
       comentariosAprobacion: this.comentarios || 'Aprobado correctamente.',
-      idAdministrador: this.idUsuario!,
+      idAprobador: this.idUsuario!,
+      rolAprobador: localStorage.getItem('rol')!
     };
 
     this.proyectoAprobacionService.aprobarProyecto(aprobacionDTO).subscribe({
@@ -113,7 +114,8 @@ export class VerDocumentoComponent implements OnInit {
       idProyecto: this.proyecto.idproyecto,
       estatusAprobacion: 'Rechazado',
       comentariosAprobacion: this.comentarios || 'Rechazado por criterios no cumplidos.',
-      idAdministrador: this.idUsuario!,
+      idAprobador: this.idUsuario!,
+      rolAprobador: localStorage.getItem('rol')!
     };
 
     this.proyectoAprobacionService.aprobarProyecto(aprobacionDTO).subscribe({

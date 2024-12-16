@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repositorio UCB</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="ver-pendientes-admin.component.css">     
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="#">Repositorio UCB</a>
+                <!---
+                <div class="user-actions">
+                    <button class="btn btn-outline-dark">Subir Archivo</button>
+                    <button class="btn btn-outline-dark">Iniciar Sesión</button>
+                    <button class="btn btn-outline-dark">Registrarse</button>
+                </div>
+            </div>
+                -->
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="header2">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <div class="nav2">
+                    <a href="index.html">
+                        <button class="btn-outline-dark custom-btn">Repositorio principal</button>
+                    </a>
+                    &rarr;
+                    <button class="btn-outline-dark custom-btn"></button>
+                </div>
+            </div>
+        </nav>
+    </div>
+<div *ngIf="documentos.length > 0; else noResultados">
+<div *ngFor="let proyecto of documentos">
+    <h4>Titulo: {{ proyecto.titulo }}</h4>
+    <p>Resumen: {{ proyecto.resumen }}</p>
+    <p><strong>Estado:</strong> {{ proyecto.estatusAprobacion }}</p>
+    <textarea #comentarios placeholder="Comentarios" class="form-control"></textarea>
+    <button (click)="aprobar(proyecto.idproyecto, comentarios.value)" class="btn btn-success">Aprobar</button>
+    <button (click)="rechazar(proyecto.idproyecto, comentarios.value)" class="btn btn-danger">Rechazar</button>
+    <button
+        class="btn btn-primary btn-sm"
+        [routerLink]="['/ver-documento', proyecto.idproyecto]"
+        >
+        Visualizar
+    </button>
+  </div>
+</div>
+<ng-template #noResultados>
+    <p>No hay proyectos parcialmente aprobados.</p>
+  </ng-template>

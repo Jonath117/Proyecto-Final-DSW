@@ -7,9 +7,9 @@ export interface ProyectoAprobacionDTO {
   idProyecto: number;
   estatusAprobacion: string;
   comentariosAprobacion: string;
-  idAdministrador: number;
+  idAprobador: number;
+  rolAprobador: string;
 }
-
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +27,9 @@ export class ProyectoAprobacionService {
   // Método para obtener proyectos pendientes
   obtenerProyectosPendientes(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/pendientes`);
+  }
+  
+  obtenerProyectosParcialmenteAprobados(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/parcialmente-aprobados`);
   }
 }
