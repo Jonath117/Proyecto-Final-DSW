@@ -2,96 +2,106 @@ import { Component, OnInit } from '@angular/core';
 import { ProyectoService } from '../../services/proyecto.service';
 import { TiposTrabajoService } from 'src/services/tipos-trabajo.service';
 
+interface Participante
+{
+  nombreCompleto: string,
+  carrera: string
+}
+
 @Component({
   selector: 'app-subir-archivo',
   templateUrl: './subir-archivo.component.html',
   styleUrls: ['./subir-archivo.component.css']
 })
-export class SubirArchivoComponent implements OnInit {
-  documento = {
+
+export class CrearProyectoComponent implements OnInit {
+  // Define el objeto del proyecto con el tipo correcto para `participantes`
+  proyecto: {
+    titulo: string;
+    resumen: string;
+    enlaceRepositorio: string;
+    idTipoTrabajo: number | null;
+    estado: string;
+    idUsuario: number | null;
+    participantes: Participante[]; // Cambia a un arreglo del tipo `Participante`
+  } = {
     titulo: '',
     resumen: '',
-    link: '',
-    idTipoTrabajo: null, // Reemplazar con el ID del tipo de documento
+    enlaceRepositorio: '',
+    idTipoTrabajo: null,
+    estado: 'Activo',
+    idUsuario: null,
+    participantes: [], // Inicializa como un arreglo vacío
   };
-  tiposTrabajo: any[] = []
-  archivo!: File; // Archivo seleccionado por el usuario
 
-  constructor(
-    private proyectoService: ProyectoService,
-    private tiposTrabajoService: TiposTrabajoService,
-  ) {}
+  archivo!: File;
+
+  constructor(private proyectoService: ProyectoService) {}
 
   ngOnInit(): void {
-    // Cargar tipos de trabajo al inicializar el componente
-    this.tiposTrabajoService.obtenerTiposTrabajo().subscribe({
-      next: (data) => {
-        this.tiposTrabajo = data;
-        console.log(this.tiposTrabajo);
-      },
-      error: (err) => console.error('Error al cargar tipos de trabajo:', err),
-    });
+    const idUsuario = localStorage.getItem('idUsuario');
+    if (!idUsuario) {
+      alert('No se pudo obtener el ID del usuario. Por favor, inicia sesión.');
+      return;
+    }
+    this.proyecto.idUsuario = parseInt(idUsuario, 10);
   }
 
-  // Manejar la selección de archivo
   seleccionarArchivo(event: any): void {
     if (event.target.files.length > 0) {
       this.archivo = event.target.files[0];
     }
   }
 
-  // Subir el documento
-  subirDocumento(): void {
+  agregarParticipante(nombre: string, carrera: string): void {
+    // Agrega un participante con el tipo correcto
+    this.proyecto.participantes.push({ nombreCompleto: nombre, carrera: carrera });
+  }
+
+  crearProyecto(): void {
     if (!this.archivo) {
       alert('Por favor, selecciona un archivo.');
       return;
     }
 
-    this.proyectoService.subirDocumentoConArchivo(this.documento, this.archivo).subscribe({
+    this.proyectoService.crearProyectoConArchivo(this.proyecto, this.archivo).subscribe({
       next: (response) => {
-        console.log('Documento subido exitosamente:', response);
-        alert('Documento subido exitosamente.');
+        console.log('Proyecto creado exitosamente:', response);
+        alert('Proyecto creado exitosamente.');
+        this.resetFormulario();
       },
       error: (err) => {
-        console.error('Error al subir el documento:', err);
-        alert('Ocurrió un error al subir el documento.');
+        console.error('Error al crear proyecto:', err);
+        alert('Ocurrió un error al crear el proyecto.');
       },
     });
   }
-/*
-  // Método para manejar el envío del formulario
-    subirArchivo(): void {
-    if (!this.selectedFile) {
-      console.error('No se seleccionó ningún archivo.');
+  
+  eliminarUltimoParticipante(): void {
+    if (this.proyecto.participantes.length === 0) {
+      alert('No hay participantes para eliminar.');
       return;
     }
   
-    const formData = new FormData();
+    if (this.proyecto.participantes.length === 1) {
+      alert('Debe haber al menos un participante.');
+      return;
+    }
   
-    // Agregar campos al FormData
-    formData.append('Titulo', this.titulo);
-    formData.append('Autores', this.autores);
-    formData.append('Categoria', this.categoria);
-    formData.append('TipoDocumento', this.tipoDocumento);
-    formData.append('PalabrasClave', this.palabrasClave);
-    formData.append('FechaPublicacion', this.fechaPublicacion);
-    formData.append('Archivo', this.selectedFile, this.selectedFile.name);
-  
-    this.documentoService.subirDocumento(formData).subscribe({
-      next: (response: any) => console.log('Documento y archivo subidos exitosamente:', response),
-      error: (err: any) => console.error('Error al subir el documento:', err),
-    });
+    this.proyecto.participantes.pop();
   }
   
-  
 
-  selectedFile: File | null = null;
-
-  onFileSelected(event: any): void {
-      const file: File = event.target.files[0];
-      if (file) {
-          this.selectedFile = file;
-          console.log('Archivo seleccionado:', file.name);
-      }
-  }*/
+  resetFormulario(): void {
+    this.proyecto = {
+      titulo: '',
+      resumen: '',
+      enlaceRepositorio: '',
+      idTipoTrabajo: null,
+      estado: 'Activo',
+      idUsuario: this.proyecto.idUsuario,
+      participantes: [],
+    };
+    this.archivo = null!;
+  }
 }

@@ -94,7 +94,7 @@
           <div class="list-group">
             <a
               *ngFor="let resultado of resultados"
-              href="#"
+              [routerLink]="['/ver-documento', resultado.idproyecto]"
               class="list-group-item list-group-item-action"
             >
               <h5 class="mb-1">{{ resultado.titulo }}</h5>

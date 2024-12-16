@@ -5,8 +5,11 @@ import { Observable } from 'rxjs';
 
 export interface ProyectoAprobacionDTO {
   idProyecto: number;
-  comentarioAprobacion: string;
+  estatusAprobacion: string;
+  comentariosAprobacion: string;
+  idAdministrador: number;
 }
+
 
 @Injectable({
   providedIn: 'root',

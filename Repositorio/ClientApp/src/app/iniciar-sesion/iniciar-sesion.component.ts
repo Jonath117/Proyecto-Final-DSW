@@ -18,7 +18,8 @@ export class IniciarSesionComponent {
   
     this.authService.iniciarSesion(datos.Correo, datos.Password).subscribe({
       next: (response) => {
-        if (response && response.rol) {
+        if (response && response.rol && response.idUsuario) {
+          localStorage.setItem('idUsuario', response.idUsuario);
           localStorage.setItem('rol', response.rol); // Guardar el rol recibido
           this.router.navigate(['/']); // Redirigir al Home
         } else {

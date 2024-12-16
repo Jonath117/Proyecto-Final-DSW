@@ -13,17 +13,28 @@ import { BusquedaAvanzadaComponent } from './busqueda-avanzada/busqueda-avanzada
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
-import { SubirArchivoComponent } from './subir-archivo/subir-archivo.component';
-import { VerArchivosComponent } from './ver-archivos/ver-archivos.component';
+import { CrearProyectoComponent } from './subir-archivo/subir-archivo.component';
+import { VerArchivosComponent } from './ver-archivos-pendientes/ver-archivos-pendientes.component';
 import { VerDocumentoComponent } from './ver-documento/ver-documento.component';
 import { AuthService } from '../services/auth.service';
 import { AreasConocimientoService } from '../services/areas-conocimiento.service';
+import { ProyectosRecientes } from './proyectos-recientes/proyectos-recientes.component';
+import { CommonModule } from '@angular/common';
+import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.component';
 
 const routes: Routes = [
-  { path: 'subir-archivo', component: SubirArchivoComponent },
-  { path: 'perfil', component: PerfilComponent }, // Nueva ruta
-  { path: '', redirectTo: '/subir-archivo', pathMatch: 'full' },
-  { path: 'ver-documento/:id', component: VerDocumentoComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'counter', component: CounterComponent },
+  { path: 'fetch-data', component: FetchDataComponent },
+  { path: 'busqueda-avanzada',component: BusquedaAvanzadaComponent},
+  { path: 'iniciar-sesion', component: IniciarSesionComponent},
+  { path: 'perfil', component: PerfilComponent},
+  { path: 'registrarse', component: RegistrarseComponent},
+  { path: 'subir-archivo', component: CrearProyectoComponent},
+  { path: 'ver-archivos-pendientes', component: VerArchivosComponent},
+  { path: 'ver-documento/:id', component: VerDocumentoComponent},
+  { path: 'proyectos-recientes', component: ProyectosRecientes},
+  { path: 'admin-usuarios', component: AdminUsuariosComponent},
 ];
 
 
@@ -38,27 +49,18 @@ const routes: Routes = [
     IniciarSesionComponent,
     PerfilComponent,
     RegistrarseComponent,
-    SubirArchivoComponent,
+    CrearProyectoComponent,
     VerArchivosComponent,
     VerDocumentoComponent,
-
+    ProyectosRecientes,
+    AdminUsuariosComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'busqueda-avanzada',component: BusquedaAvanzadaComponent},
-      { path: 'iniciar-sesion', component: IniciarSesionComponent},
-      { path: 'perfil', component: PerfilComponent},
-      { path: 'registrarse', component: RegistrarseComponent},
-      { path: 'subir-archivo', component: SubirArchivoComponent},
-      { path: 'ver-archivos', component: VerArchivosComponent},
-      { path: 'ver-documento/:id', component: VerDocumentoComponent}
-    ])
+    RouterModule.forRoot(routes)
   ],
   providers: [AuthService, AreasConocimientoService],
   bootstrap: [AppComponent]

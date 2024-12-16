@@ -56,18 +56,13 @@ import { Component, OnInit } from '@angular/core';
 import { ProyectoAprobacionService, ProyectoAprobacionDTO } from '../../services/proyecto.aprobacion.service';
 
 @Component({
-  selector: 'app-ver-archivos',
-  templateUrl: './ver-archivos.component.html',
-  styleUrls: ['./ver-archivos.component.css'],
+  selector: 'app-ver-archivos-pendientes',
+  templateUrl: './ver-archivos-pendientes.component.html',
+  styleUrls: ['./ver-archivos-pendientes.component.css'],
 })
 export class VerArchivosComponent implements OnInit {
   documentos: any[] = []; // Lista de documentos obtenidos del backend
-  filtros = {
-    fecha: '',
-    autor: '',
-    estado: '',
-  }; // Filtros para la búsqueda
-
+  
   constructor(private proyectoAprobacionService: ProyectoAprobacionService) {}
 
   ngOnInit(): void {
@@ -84,44 +79,38 @@ export class VerArchivosComponent implements OnInit {
     });
   }
 
-  // Método para aplicar filtros (puedes personalizarlo según tu lógica)
-  aplicarFiltros(): void {
-    console.log('Filtros aplicados:', this.filtros);
-    // Aquí puedes filtrar `documentos` localmente o enviar los filtros al backend
-  }
-
-  aprobar(id: number): void {
+  aprobar(id: number, comentarios: string): void {
     const aprobacionDTO: ProyectoAprobacionDTO = {
       idProyecto: id,
-      comentarioAprobacion: 'Aprobado correctamente.',
+      estatusAprobacion: 'Aprobado',
+      comentariosAprobacion: comentarios || 'Aprobado correctamente.', // Si no hay comentario, usa uno predeterminado
+      idAdministrador: parseInt(localStorage.getItem('idUsuario') || '0', 10), // ID del revisor actual
     };
-
+  
     this.proyectoAprobacionService.aprobarProyecto(aprobacionDTO).subscribe({
       next: () => {
-        console.log(`Documento con ID ${id} aprobado.`);
+        console.log(`Documento con ID ${id} aprobado con comentario: "${comentarios}".`);
         this.obtenerDocumentosPendientes(); // Actualizar la lista de documentos
       },
       error: (err) => console.error(`Error al aprobar documento con ID ${id}:`, err),
     });
   }
-
-  rechazar(id: number): void {
+  
+  rechazar(id: number, comentarios: string): void {
     const aprobacionDTO: ProyectoAprobacionDTO = {
       idProyecto: id,
-      comentarioAprobacion: 'Rechazado por criterios no cumplidos.',
+      estatusAprobacion: 'Rechazado',
+      comentariosAprobacion: comentarios || 'Rechazado por criterios no cumplidos.', // Comentario predeterminado
+      idAdministrador: parseInt(localStorage.getItem('idUsuario') || '0', 10), // ID del revisor actual
     };
-
+  
     this.proyectoAprobacionService.aprobarProyecto(aprobacionDTO).subscribe({
       next: () => {
-        console.log(`Documento con ID ${id} rechazado.`);
+        console.log(`Documento con ID ${id} rechazado con comentario: "${comentarios}".`);
         this.obtenerDocumentosPendientes(); // Actualizar la lista de documentos
       },
       error: (err) => console.error(`Error al rechazar documento con ID ${id}:`, err),
     });
   }
-
-  visualizar(id: number): void {
-    console.log(`Visualizando documento con ID: ${id}`);
-    // Aquí puedes redirigir o abrir el documento en una vista detallada
-  }
+  
 }

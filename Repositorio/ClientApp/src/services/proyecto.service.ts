@@ -21,18 +21,16 @@ export class ProyectoService {
   }
 
   // Crear un nuevo proyecto
-  subirDocumentoConArchivo(documento: any, archivo: File): Observable<any> {
+  crearProyectoConArchivo(proyecto: any, archivo: File): Observable<any> {
     const formData = new FormData();
-
-    // Agregar el documento como JSON en el campo "documento"
-    formData.append('documento', new Blob([JSON.stringify(documento)], { type: 'application/json' }));
-
-    // Agregar el archivo
-    formData.append('archivo', archivo);
-
-    // Hacer la solicitud POST al endpoint
-    return this.http.post<any>(`${this.apiUrl}/subir`, formData);
+    
+    // Asegúrate de que 'proyectoDTO' coincida con el parámetro del backend
+    formData.append('proyectoDTO', JSON.stringify(proyecto));
+    formData.append('archivo', archivo); // 'archivo' debe coincidir exactamente con el nombre del parámetro en el backend
+    
+    return this.http.post(`${this.apiUrl}/subir`, formData);
   }
+  
 
   // Actualizar un proyecto existente
   actualizarProyecto(id: number, proyecto: any): Observable<void> {
@@ -50,4 +48,13 @@ export class ProyectoService {
       params: { termino },
     });
   }
+
+  obtenerRecientes(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}/recientes`);
+  }
+
+  obtenerProyectosPorUsuario(idUsuario: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/mis-proyectos/${idUsuario}`);
+  }
+  
 }

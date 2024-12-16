@@ -12,9 +12,6 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="#">Repositorio UCB</a>
-                <a routerLink="/perfil">
-                    <button class="btn btn-login">Ver Perfil</button>
-                </a>
             </div>
         </nav>
     </header>
@@ -33,95 +30,101 @@
     </div>
 
     <div class="container mt-4">
-        <h2>Subir Documento</h2>
-        <form>
-          <!-- Título -->
-          <div class="mb-3">
-            <label for="titulo" class="form-label">Título</label>
-            <input
-              type="text"
-              id="titulo"
-              class="form-control"
-              [(ngModel)]="documento.titulo"
-              name="titulo"
-              required
-            />
-          </div>
-      
-          <!-- Resumen -->
-          <div class="mb-3">
-            <label for="resumen" class="form-label">Resumen</label>
-            <textarea
-              id="resumen"
-              class="form-control"
-              [(ngModel)]="documento.resumen"
-              name="resumen"
-              rows="3"
-              required
-            ></textarea>
-          </div>
-
-          <!-- Link del repo -->
-          <div class="mb-3">
-            <label for="titulo" class="form-label">Link al repositorio</label>
-            <input
-              type="text"
-              id="link"
-              class="form-control"
-              [(ngModel)]="documento.link"
-              name="link"
-              required
-            />
-          </div>
-      
-          <!-- Tipo de Trabajo -->
+      <h2>Crear Proyecto</h2>
+      <form>
+        <!-- Título -->
         <div class="mb-3">
-            <label for="tipoTrabajo" class="form-label">Tipo de Trabajo</label>
-            <select
-            id="tipoTrabajo"
-            class="form-select text-dark bg-white"
-            [(ngModel)]="documento.idTipoTrabajo"
+          <label for="titulo" class="form-label">Título</label>
+          <input
+            type="text"
+            id="titulo"
+            class="form-control"
+            [(ngModel)]="proyecto.titulo"
+            name="titulo"
+            required
+          />
+        </div>
+    
+        <!-- Resumen -->
+        <div class="mb-3">
+          <label for="resumen" class="form-label">Resumen</label>
+          <textarea
+            id="resumen"
+            class="form-control"
+            [(ngModel)]="proyecto.resumen"
+            name="resumen"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+    
+        <!-- Enlace al Repositorio -->
+        <div class="mb-3">
+          <label for="enlaceRepositorio" class="form-label">Enlace al Repositorio</label>
+          <input
+            type="url"
+            id="enlaceRepositorio"
+            class="form-control"
+            [(ngModel)]="proyecto.enlaceRepositorio"
+            name="enlaceRepositorio"
+          />
+        </div>
+    
+        <!-- Tipo de Trabajo -->
+        <div class="mb-3">
+          <label for="idTipoTrabajo" class="form-label">Tipo de Trabajo</label>
+          <select
+            id="idTipoTrabajo"
+            class="form-select"
+            [(ngModel)]="proyecto.idTipoTrabajo"
             name="idTipoTrabajo"
             required
-            style="color: #000; background-color: #fff;"
-            >
-            <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.idTipoTrabajo">
-                {{ tipo.nombre }}
-            </option>
-            </select>
+          >
+            <option [value]="null" disabled selected>Selecciona un tipo</option>
+            <option [value]="1">Semestral</option>
+            <option [value]="2">Final</option>
+            <option [value]="3">Interdisciplinario</option>
+            <option [value]="4">Investigación</option>
+            <option [value]="5">Proyecto Especial</option>
+            <option [value]="6">Tesis</option>
+          </select>
         </div>
-      
-          <!-- Archivo -->
-          <div class="mb-3">
-            <label for="archivo" class="form-label">Seleccionar Archivo</label>
-            <input
-              type="file"
-              id="archivo"
-              class="form-control"
-              (change)="seleccionarArchivo($event)"
-              required
-            />
+    
+        <!-- Archivo -->
+        <div class="mb-3">
+          <label for="archivo" class="form-label">Archivo PDF</label>
+          <input
+            type="file"
+            id="archivo"
+            class="form-control"
+            (change)="seleccionarArchivo($event)"
+            required
+          />
+        </div>
+    
+        <!-- Participantes -->
+        <div class="mb-3">
+          <h4>Participantes</h4>
+          <div *ngFor="let participante of proyecto.participantes; let i = index">
+            <p>{{ i + 1 }}. {{ participante.nombreCompleto }} - {{ participante.carrera }}</p>
           </div>
-      
-          <!-- Botón -->
-          <button type="button" class="btn btn-primary" (click)="subirDocumento()">
-            Subir Documento
-          </button>
-        </form>
-      </div>
-
-  <footer>
-    <div class="footer-content text-center">
-        <p>&copy; 2024 Universidad Católica Boliviana. Todos los derechos reservados.</p>
-        <div class="footer-links">
-            <ul>
-                <li><a href="#">Casos de Uso</a></li>
-                <li><a href="#">Explorar</a></li>
-                <li><a href="#">Recursos</a></li>
-                <li><a href="Soporte.html">Soporte</a></li>
-            </ul>
+          <div class="mt-2">
+            <input type="text" #nombre placeholder="Nombre Completo" class="form-control mb-2" />
+            <input type="text" #carrera placeholder="Carrera" class="form-control mb-2" />
+            <button type="button" class="btn btn-primary" (click)="agregarParticipante(nombre.value, carrera.value)">
+              Agregar Participante
+            </button>
+            <button type="button" class="btn btn-danger" (click)="eliminarUltimoParticipante()">
+              Quitar Último Participante
+            </button>
+          </div>
         </div>
+    
+        <!-- Botón Crear -->
+        <button type="button" class="btn btn-success" (click)="crearProyecto()">
+          Crear Proyecto
+        </button>
+      </form>
     </div>
-</footer>
 </body>
 </html>

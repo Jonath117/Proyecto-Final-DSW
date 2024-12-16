@@ -1,65 +1,12 @@
 @import '../home/home.component.css';
 
-/* VerDocumento.css */
-
-
-
-.breadcrumb-bar {
-    background-color: #e9ecef;
-    padding: 10px;
-    font-size: 14px;
+.btn-primary {
+background-color: #007bff; /* Azul */
+color: #fff;
+border: 1px solid #007bff;
 }
 
-.breadcrumb-link {
-    text-decoration: none;
-    color: #000;
-}
-
-.document-view {
-
-    padding: 20px 0;
-}
-
-.doc-title {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.doc-author {
-    text-align: center;
-    font-size: 18px;
-    color: #555;
-}
-
-
-
-.doc-preview {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.doc-image {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-}
-
-.doc-info {
-    flex: 1;
-}
-
-.doc-info p {
-    margin: 5px 0;
-}
-
-.footer-content {
-    text-align: center;
-    background-color: #FFD700;
-    padding: 1rem;
-    /*color: #004080;font-size: 30px;
-    border-top: 2px solid #004080;*/
-    margin-top:290px;
-    
+.btn-primary:hover {
+background-color: #0056b3;
+border-color: #0056b3;
 }
