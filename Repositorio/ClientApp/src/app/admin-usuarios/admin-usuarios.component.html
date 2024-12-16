@@ -1,0 +1,86 @@
+<header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand">Repositorio UCB</a>
+        <!-- Botones alineados a la derecha -->
+      </div>
+    </nav>
+</header>
+
+<div class="header2">
+  <nav class="navbar navbar-expand-lg">
+      <div class="container">
+          <div class="nav2">
+              <a href="index.html">
+                  <button class="btn-outline-dark custom-btn">Repositorio principal</button>
+              </a>
+              &rarr;
+              <button class="btn-outline-dark custom-btn">Administracion de usuarios</button>
+          </div>
+      </div>
+  </nav>
+</div>
+
+<div class="container mt-4">
+    <h2>Administrar Usuarios</h2>
+  
+    <!-- Formulario para agregar un nuevo usuario -->
+    <form (ngSubmit)="agregarUsuario()" class="mb-4">
+      <div class="form-row">
+        <input type="text" class="form-control mb-2" placeholder="Nombre Completo" [(ngModel)]="nuevoUsuario.nombreCompleto" name="nombreCompleto" required />
+        <input type="email" class="form-control mb-2" placeholder="Correo" [(ngModel)]="nuevoUsuario.correo" name="correo" required />
+        <select class="form-control mb-2" [(ngModel)]="nuevoUsuario.rol" name="rol" required>
+          <option value="" disabled selected>Selecciona un rol</option>
+          <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
+        </select>
+        <input
+          type="password"
+          class="form-control mb-2"
+          placeholder="Contraseña"
+          [(ngModel)]="nuevoUsuario.contrasena"
+          name="contraseña"
+          required
+        />
+      </div>
+      <div class="button-container mt-3">
+        <!-- Botón para Agregar Usuario -->
+        <button class="btn btn-success" (click)="agregarUsuario()">
+          + Agregar Usuario
+        </button>
+      </div>
+    </form>
+  
+    <!-- Tabla de usuarios -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.idusuario }}</td>
+          <td>
+            <input [(ngModel)]="usuario.nombreCompleto" name="nombreCompleto_{{usuario.idusuario}}" class="form-control" />
+          </td>
+          <td>
+            <input [(ngModel)]="usuario.correo" name="correo_{{usuario.idusuario}}" class="form-control" />
+          </td>
+          <td>
+            <select [(ngModel)]="usuario.rol" name="rol_{{usuario.idusuario}}" class="form-control">
+              <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
+            </select>
+          </td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="actualizarUsuario(usuario)">✎ Actualizar</button>
+            <button class="btn btn-danger btn-sm" (click)="eliminarUsuario(usuario.idusuario)">✖ Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

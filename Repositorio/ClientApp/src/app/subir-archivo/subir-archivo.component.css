@@ -19,5 +19,59 @@
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-  
 }
+
+/* Botón Principal: Agregar Participante */
+.btn-primary {
+  background-color: #007bff; /* Azul estándar */
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Efecto de transición */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Azul oscuro al pasar el ratón */
+}
+
+/* Botón de Eliminar */
+.btn-danger {
+  background-color: #dc3545; /* Rojo */
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* Rojo más oscuro */
+}
+
+/* Botón de Crear Proyecto */
+.btn-success {
+  background-color: #28a745; /* Verde */
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #218838; /* Verde oscuro al pasar el ratón */
+}
+
+/* Asegúrate de que los botones no tengan opacidad */
+button {
+  opacity: 1 !important; /* Evita que se vean desactivados */
+  pointer-events: auto;
+}
+

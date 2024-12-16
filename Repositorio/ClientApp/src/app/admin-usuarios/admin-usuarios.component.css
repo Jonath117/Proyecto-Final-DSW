@@ -58,42 +58,4 @@ border: 1px solid #6c757d;
 background-color: #5a6268;
 border-color: #5a6268;
 }
- 
-.container {
-    max-width: 800px;
-    margin: auto;
-  }
-  
-  .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card p {
-    margin: 10px 0;
-    font-size: 16px;
-  }
-  
-  h2, h3 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #007bff;
-  }
-  
-  table {
-    margin-top: 20px;
-    width: 100%;
-    text-align: left;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-  }
   

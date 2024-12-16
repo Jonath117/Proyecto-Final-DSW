@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +18,8 @@ export class IniciarSesionComponent {
   
     this.authService.iniciarSesion(datos.Correo, datos.Password).subscribe({
       next: (response) => {
-        if (response && response.rol) {
+        if (response && response.rol && response.idUsuario) {
+          localStorage.setItem('idUsuario', response.idUsuario);
           localStorage.setItem('rol', response.rol); // Guardar el rol recibido
           this.router.navigate(['/']); // Redirigir al Home
         } else {
